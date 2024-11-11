@@ -80,4 +80,3 @@ console.log('이름은',obj.name,'나이는',obj['age']+'살입니다');
 console.log(freiends[0]); // 배열의 순번(인덱스) 0부터 시작.
 console.log(inputValue+'번쨰 인덱스의 이름은'+freiends[inputValue]);
 
-
