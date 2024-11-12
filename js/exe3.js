@@ -12,42 +12,43 @@ switch (question) {
     alert('너비' + (w * h));
     break;
   case '3':
-    let a = prompt('1번숫자');
-    let b = prompt('2번숫자');
-    let c = prompt('3번숫자');
-    let bign = 0, sman = 0;
-    
-    if (a > b) {
-      if (b > c) {
-        bign = a;
-        sman = c;
-      }
-      else if (c > b) {
-        if (a > c) {
-          bign = a;
-          sman = b;
+    let num1 = Number(prompt('1번숫자'));
+    let num2 = Number(prompt('2번숫자'));
+    let num3 = Number(prompt('3번숫자'));
+
+    //동일한 값이 있으면 처리 안함
+
+    let max = 0, min = 0;
+    if (num2 > num1) {
+      if (num2 > num3) {
+        max = num2;
+        if (num1 > num3) {
+          min = num3;
         }
-        else if (c > a) {
-          bign = c;
-          sman = b;
+        else{
+          min = num1;
         }
       }
-    }
-    else if (b > a) {
-      if (a > c) {
-        bign = b;
-        sman = c;
-      }
-      else if (c > a) {
-        if (b > c) {
-          bign = b;
-          sman = a;
-        }
-        else if (c > b) {
-          bign = c;
-          sman = a;
-        }
+      else{
+        max = num3;
+        min = num1;
       }
     }
-    console.log('젤 큰숫자 ' + bign + ' 젤 작은숫자 ' + sman);
+    else{
+      if (num1 > num3) {
+        max = num1;
+        if (num2> num3) {
+          min = num3;
+        }
+        else{
+          min = num2;
+        }
+      }
+      else{
+        max = num3;
+        min = num2;
+      }
+    }
+    console.log('젤 큰숫자 ' + max + ' 젤 작은숫자 ' + min);
 }
+
