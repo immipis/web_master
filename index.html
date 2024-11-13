@@ -8,16 +8,22 @@
     #show{
       width: 100px;
       height: 100px;
+
     }
+    
   </style>
 </head>
 <body>
-  <span>친구이름:</span><input type="text" id="inpV"><button id="addBtn" onclick="addFriendFnc()">등록</button>
+  <span>친구이름:</span><input type="text" id="name">
+  <span>나이:</span><input type="number" id="age">
+  <button id="addBtn" onclick="friendListFnc()">등록</button>
+
   <div id="show">
-
+    <span>결과값 <p id='result'></p></span>
+    <span>결과값 <div id='value'></div></span>
   </div>
-  <div id="show"></div>
-
-  <script src="js/test.js"></script>
+  
+  <span></span>
+  <script src="js/function1.js"></script>
 </body>
 </html>
