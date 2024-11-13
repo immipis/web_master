@@ -2,6 +2,7 @@
 
 let numAry1=[50,60,40,70,20];
 let numAry2=[55,63,42,79,27];
+let max = 0;
 
 console.log(`sumAry(numAry1)의 합계 ${sumAry(numAry1)}`)
 console.log(`sumAry(numAry2)의 합계 ${sumAry(numAry2)}`)
@@ -22,3 +23,17 @@ function sum(param1,param2){
   let result = param1 + param2
   return result;
 }
+
+// 배열을 매개값으로 받아서 요소중에서 제일큰값을 구하는.
+
+function getMaxValue(param1){
+  for(let i=0;i<param1.length;i++)
+    {
+      if(max<param1[i]){
+        max=param1[i]
+      }
+    }
+    return max
+}
+
+console.log(getMaxValue(numAry2))
