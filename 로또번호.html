@@ -40,24 +40,23 @@
         <div id="lotto"></div>
     </div>
     <script>
-
         //임의의 숫자 6개 생성 1~45
         let cN = function () {
+            document.querySelector('#lotto').innerHTML = ``
             let rn = []
-            for (i = 0; rn.length < 6; i++) {
+            console.log(`실행됨`)
+            let uniq = true;
+            while (rn.length < 6) {
                 let a = parseInt(Math.random() * 45 + 1)
-                if (rn.length == 0) {
-                    rn.push(a)
-                    console.log('리스트 안에값' + rn)
-                }
-                for(j=0; j < rn.length; j++){
-                    if(rn[j] != a){
-                        rn.push(a)
-                        console.log('리스트 안에값' + rn)
-                        break;
-                    }else{
-                        break;
+                console.log('뽑은숫자'+a)
+                for (let i = 0; i < rn.length; i++) {
+                    if (a == rn[i]) {
+                        console.log(`${i+1}번째 값과 곂침니다`)
+                        a = 0
                     }
+                }
+                if (a != 0) {
+                    rn.push(a)
                 }
             }
             cNN(rn)
