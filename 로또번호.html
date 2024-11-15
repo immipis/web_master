@@ -50,8 +50,16 @@
         let cN = function () {
             document.querySelector('#lotto').innerHTML = ``
             let rn = []
+<<<<<<< HEAD
             while (rn.length < 6) {
                 let a = parseInt(Math.random() * 45 + 1)
+=======
+            console.log(`실행됨`)
+            let uniq = true;
+            while (rn.length < 6) {
+                let a = parseInt(Math.random() * 45 + 1)
+                console.log('뽑은숫자'+a)
+>>>>>>> 4b0d733ea33f124010e1a43d3d04a8bc25955c90
                 for (let i = 0; i < rn.length; i++) {
                     if (a == rn[i]) {
                         console.log(`${i+1}번째 값과 곂침니다`)
