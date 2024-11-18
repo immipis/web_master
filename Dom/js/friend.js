@@ -140,14 +140,7 @@ document.querySelector('button.btn.btn-danger')
 
 document.querySelector('thead input[type="checkbox"]').addEventListener('change', (e) => {
   let listTr = document.querySelectorAll('#list tr')
-  if (document.querySelector('thead input[type="checkbox"]').checked == true) {
     for (let i = 0; i < listTr.length; i++) {
-      listTr[i].children[0].children[0].checked = !listTr[i].children[0].children[0].checked //ture
+      listTr[i].children[0].children[0].checked = !listTr[i].children[0].children[0].checked
     }
-  }
-  else{
-    for (let i = 0; i < listTr.length; i++) {
-      listTr[i].children[0].children[0].checked = !listTr[i].children[0].children[0].checked //false
-    }
-  }
 })
