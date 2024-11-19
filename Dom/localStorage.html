@@ -40,6 +40,7 @@
         let template = document.querySelector('div.row>div.col-sm-3').cloneNode(true);//true하면 하위요소 가져옴
         template.querySelector('img').setAttribute('src',`images/${element.name}.jpg`)
         template.querySelector('h5.card-title').innerHTML = element.name
+        template.querySelector('p.card-text').innerHTML = element.birth + '<br>' +  element.btype
         document.querySelector(`div.row`).appendChild(template);
       })
 
