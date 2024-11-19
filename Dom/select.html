@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>select.html</title>
+  <style>
+    #container {
+      width: 500px;
+      height: 500px;
+      background-color: yellow;
+    }
+
+    #container span {
+      display: inline-block;
+      font-size: large;
+      width: 110px;
+      margin: 2px;
+      padding: 1px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  입력 : <input type="text" id="userValue">
+  <button id="deleteWord">삭제</button>
+
+  <div id="container">
+
+  </div>
+  <script>
+    let str = 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas corrupti similique harum tempora et commodi, tempore enim esse, voluptatum nam qui consectetur in, sapiente quasi fuga assumenda a rerum rem.'
+    let strAry = str.split(' ');
+    strAry.forEach(word => {
+      // console.log(word)
+      // document.write(`<span>${strAry}</span>`) 1111
+      // document.querySelector('#container').innerHTML +=`<span> ${word} </span>` 222
+      let span = document.createElement('span')
+      span.innerText = word;
+      document.querySelector(`#container`).appendChild(span)
+    })
+    document.querySelector('#deleteWord').addEventListener('click', (e) => {
+      let inV = document.querySelector('#userValue').value
+      document.querySelectorAll('#container span').forEach(element => {
+        if(inV == element.innerHTML){
+          element.remove()
+        }
+      })
+    })
+    
+    // let no = 100;
+    // let job = setInterval(function(){
+    //   if(no <=0){
+    //     clearInterval(job)
+    //     alert('싫패')
+    //   }
+    //   if(document.querySelectorAll('#container span').length == 0){
+    //     clearInterval(job)
+    //     alert('성공')
+    //   }
+    //   console.log(no--)
+    // },1000)
+
+
+  </script>
+</body>
+
+</html>
