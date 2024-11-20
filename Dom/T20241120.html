@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    #container {
+      border: 1px solid green;
+      margin: 0 auto;
+    }
+
+    hr {
+      height: 2px;
+      background-color: rgb(255, 0, 0);
+      width: 98%;
+      margin: 10px auto;
+    }
+
+    table {
+      width: 97%;
+      margin: 0 auto;
+      text-align: center;
+      
+    }
+
+    #inwin th {
+      background-color: yellow;
+    }
+
+    #inwin input {
+      width: 100%;
+    }
+
+    #inwin button {
+      width: 30%;
+      background-color: #eee;
+    }
+    #outwin table{
+      border: 2px solid blue;
+      padding: 10px 0px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    
+    #outwin thead{
+      background-color: black;
+      margin-top: 10px;
+    }
+    #outwin th{
+      color: white;
+      padding: 15px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="container">
+
+    <div id="inwin">
+      <table>
+        <hr>
+        <tr>
+          <th>도서코드</th>
+          <td><input type="text" name="bookCode" id="bookCode"></td>
+        </tr>
+        <tr>
+          <th>도서명</th>
+          <td><input type="text" name="bookName" id="bookName"></td>
+          <td id="save"><button>저장</button></td>
+        </tr>
+        <tr>
+          <th>저자</th>
+          <td><input type="text" name="author" id="author"></td>
+          <td rowspan="2" id="cdel"><button>선택 삭제</button></td>
+        </tr>
+        <tr>
+          <th>출판사</th>
+          <td><input type="text" name="press" id="press"></td>
+        </tr>
+        <tr>
+          <th>가격</th>
+          <td><input type="number" name="price" id="price"></td>
+        </tr>
+      </table>
+    </div>
+    <div id="outwin">
+      <table>
+        <thead style="margin: 10px;">
+          <th><input type="checkbox"></th>
+          <th>도서코드</th>
+          <th>도서명</th>
+          <th>저자</th>
+          <th>출반사</th>
+          <th>가격</th>
+          <th>삭제</th>
+        </thead>
+        <tbody id="list">
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="js/bookList.js"></script>
+  <script src="js/T20241120.js"></script>
+</body>
+
+</html>
