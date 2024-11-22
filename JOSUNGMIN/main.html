@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id='container'>
+    <div id="top">
+      <a href="main.html" id="logo"><img src="images/apple.jpg" alt=""></a>
+      <input type="text"  id="such"><button  id="suchbtn">검색</button>
+      <a href="mypage.html">마이페이지</a>
+      <a href="login.html">로그아웃</a>
+    </div>
+    <div id="nav">
+      <ul>
+        <li>한식</li>
+        <li>중식</li>
+        <li>양식</li>
+        <li>일식</li>
+        <li>내 냉장고</li>
+      </ul>
+    </div>
+    <div id="main">
+      <div id="recipe">
+      </div>
+    </div>
+  </div>
+  <script>
+    let logId = localStorage.getItem('logId')
+    let logName = localStorage.getItem('logName')
+    let myData = JSON.parse(localStorage.getItem('myData'))
+    let recipeData = JSON.parse(localStorage.getItem('recipeData'))
+    let materialData = JSON.parse(localStorage.getItem('materialData'))
+    let myMaterialData = JSON.parse(localStorage.getItem('myMaterialData'))
+    let rcode = 0
+    dorw()
+    function redorw(element) {
+
+      let recipe =
+        `
+              <div id="rinfo" rcode=${element.rcode}>
+                <img src="images/${element.rimage}" alt="">
+                <div id="rname">${element.rname}</div>
+                <div id="rdescription">${element.rdescription}</div>
+              </div>
+        `
+
+      document.querySelector('#recipe').insertAdjacentHTML("beforeend", recipe)
+    }
+
+    function dorw(e) {
+      document.querySelector('#recipe').innerHTML = ''
+      console.log(e)
+      let newrecipe = recipeData.filter(e2 => e2.rtag == e)
+      let haveM2 = myMaterialData.filter(e2 => e2.id == logId)
+      if (e != undefined && e != '내 냉장고') {
+        newrecipe.forEach(element => {
+          redorw(element)
+        })
+      }
+      else if (e == '내 냉장고') {
+        haveM2.forEach(e => {
+          let precipe = recipeData.filter(e2 => e2.material == e.material)
+          precipe.forEach(e => {
+            redorw(e)
+          })
+        })
+      }
+      else {
+        recipeData.forEach(element => {
+          redorw(element)
+        });
+      }
+
+    }
+    document.querySelector('#nav').addEventListener('click', e => {
+      dorw(e.target.innerHTML)
+    })
+    document.querySelector('#suchbtn').addEventListener('click', e => {
+      document.querySelector('#recipe').innerHTML = ''
+      let asd = document.querySelector('#such').value
+      let asdf = recipeData.filter(e=>e.material == asd || e.rcode == asd ||e.rname == asd ||e.rtag == asd)
+      asdf.forEach(element => {
+        redorw(element)
+      });
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <script src="js/data.js"></script>
+  <script>
+    localStorage.setItem('myData',JSON.stringify(myData))
+    localStorage.setItem('recipeData',JSON.stringify(recipeData))
+    localStorage.setItem('materialData',JSON.stringify(materialData))
+    localStorage.setItem('myMaterialData',JSON.stringify(myMaterialData))
+    location.href = 'login.html'
+  </script>
+</body>
+
+</html>

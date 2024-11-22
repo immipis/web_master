@@ -1,0 +1,82 @@
+div{
+  border: 1px solid black;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+#top{
+  width: 99%;
+  background-color: yellowgreen;
+  border: 1px solid red;
+  margin-top: 50px;
+  height: 100px;
+  line-height: 100px;
+}
+
+#nav{
+  width: 99%;
+  background-color: skyblue;
+  border: 1px solid red;
+  overflow: hidden;
+}
+#nav ul{
+  margin: 0;
+  padding: 0;
+}
+#nav li{
+  float: left;
+  list-style: none;
+  width: 20%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+#nav li:hover{
+  background-color: red;
+}
+
+#main{
+  width: 99%;
+  background-color: goldenrod;
+  overflow: hidden;
+}
+#recipe div{
+  width: 50%;
+  text-align: center;
+  background-color: red;
+  float: left;
+}
+#recipe img{
+  width: 50%;
+  height: 500px;
+}
+
+
+#rinfo div{
+  float: none;
+}
+
+#rname{
+  font-size: 30px;
+}
+a img{
+  height: 98px;
+  width: 30%;
+  margin: 0 30px;
+  float: left;
+  border: 1px solid black;
+}
+
+#top input{
+  height: 45px;
+  width: 40%;
+}
+#top button{
+  height: 45px;
+  margin-right: 50px;
+}
+#top a{
+  text-decoration-line: none;
+  color: red;
+  margin: 0 10px;
+}

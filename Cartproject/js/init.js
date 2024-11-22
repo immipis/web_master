@@ -92,14 +92,3 @@
         qty: 1
       }
     ]
-
-    // 객체의 정보를 활용해서 row 생성.
-    function makeRow(obj = {}) {
-      let tr = document.createElement('tr');
-      for (let prop in obj) {
-        let td = document.createElement('td');
-        td.innerHTML = obj[prop];
-        tr.appendChild(td);
-      }
-      return tr;
-    }

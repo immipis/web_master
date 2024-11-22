@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="container">
+    <table class="table">
+      <tr>
+        <th>아이디</th>
+        <td><input type="text" name="uid" id="uid" class="form-control"></td>
+      </tr>
+      <tr>
+        <th>비밀번호</th>
+        <td><input type="password" name="upw" id="upw" class="form-control"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button>로그인</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    const myData = JSON.parse(localStorage.getItem('myData'))
+    document.querySelector('button').addEventListener('click',e=>{
+      let id = document.querySelector('#uid').value;
+      let pw = document.querySelector('#upw').value;
+      let loginInfo = myData.filter(member =>member.id == id && member.pw == pw)
+      if(loginInfo.length){
+        localStorage.setItem('logId',id);
+        localStorage.setItem('logName',loginInfo[0].name);
+        location.href='main.html'
+      }
+      else{
+        alert('입력정보를 확인하세요')
+      }
+    })
+  </script>
+
+</body>
+
+</html>
