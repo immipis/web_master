@@ -13,10 +13,11 @@
 <body>
   <div id='container'>
     <div id="top">
-      <a href="main.html" id="logo"><img src="images/apple.jpg" alt=""></a>
-      <input type="text"  id="such"><button  id="suchbtn">검색</button>
-      <a href="mypage.html">마이페이지</a>
-      <a href="login.html">로그아웃</a>
+      <a href="main.html" id="logo"><img src="images/my_cooking_logo.png" alt="" ></a>
+      <input type="text" id="such"> 
+      <img src="images/sc.png" alt="검색" id="suchbtn" class="btns">
+      <a href="mypage.html"><img src="images/mp.png" alt="마이페이지" class="btns right"></a>
+      <a href="login.html"><img src="images/lo.png" alt="로그아웃" class="btns right" style="width: 37px;"></a>
     </div>
     <div id="nav">
       <ul>
@@ -39,7 +40,7 @@
     let recipeData = JSON.parse(localStorage.getItem('recipeData'))
     let materialData = JSON.parse(localStorage.getItem('materialData'))
     let myMaterialData = JSON.parse(localStorage.getItem('myMaterialData'))
-    let rcode = 0
+    let ttt = []
     dorw()
     function redorw(element) {
 
@@ -51,13 +52,23 @@
                 <div id="rdescription">${element.rdescription}</div>
               </div>
         `
-
       document.querySelector('#recipe').insertAdjacentHTML("beforeend", recipe)
+      document.querySelectorAll('#rinfo').forEach(e => {
+      e.addEventListener('click', e2 => {
+        if (e2.target.id == 'rinfo') {
+          ttt = recipeData.filter(e => e.rdescription == e2.target.childNodes[5].innerHTML)
+        }
+        else {
+          ttt = recipeData.filter(e => e.rdescription == e2.target.parentElement.childNodes[5].innerHTML)
+        }
+        localStorage.setItem('recipeInfoData', JSON.stringify(ttt))
+        location.href = 'recipe.html'
+      })
+    })
     }
-
     function dorw(e) {
+
       document.querySelector('#recipe').innerHTML = ''
-      console.log(e)
       let newrecipe = recipeData.filter(e2 => e2.rtag == e)
       let haveM2 = myMaterialData.filter(e2 => e2.id == logId)
       if (e != undefined && e != '내 냉장고') {
@@ -66,8 +77,10 @@
         })
       }
       else if (e == '내 냉장고') {
-        haveM2.forEach(e => {
-          let precipe = recipeData.filter(e2 => e2.material == e.material)
+        haveM2.forEach(e2 => {
+          let precipe = recipeData.filter(e =>
+            e2.material == e.material
+          )
           precipe.forEach(e => {
             redorw(e)
           })
@@ -86,11 +99,21 @@
     document.querySelector('#suchbtn').addEventListener('click', e => {
       document.querySelector('#recipe').innerHTML = ''
       let asd = document.querySelector('#such').value
-      let asdf = recipeData.filter(e=>e.material == asd || e.rcode == asd ||e.rname == asd ||e.rtag == asd)
-      asdf.forEach(element => {
-        redorw(element)
-      });
+      let qwe = materialData.filter(e => asd == e.mname)
+      let asdf = recipeData.filter(e => e.rcode == asd || e.rname == asd || e.rtag == asd)
+      if (qwe.length != 0) {
+        let zxc = recipeData.filter(element => element.material == qwe[0].material);
+        zxc.forEach(element => {
+          redorw(element)
+        });
+      }
+      else {
+        asdf.forEach(element => {
+          redorw(element)
+        });
+      }
     })
+
   </script>
 </body>
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/recipe.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="top">
+      <a href="main.html" id="logo"><img src="images/home.png" alt="" id="logoimg" ></a>
+    </div>
+    <div id="recipe"></div>
+  </div>
+
+  <script>
+    let recipeInfoData = JSON.parse(localStorage.getItem('recipeInfoData'))
+    let asd = recipeInfoData[0].explanation.split(';')
+    let recipe =
+      `
+              <div id="rinfo" rcode=${recipeInfoData[0].rcode}>
+                <img src="images/${recipeInfoData[0].rimage}" alt="">
+                <div id="explanation">
+                  <h1>재료</h1>
+                  <p id='smaterial'>${recipeInfoData[0].smaterial+'<br>'}</p>
+                </div>
+              </div>
+        `
+    document.querySelector('#top').insertAdjacentHTML("afterbegin", recipeInfoData[0].rname)
+    document.querySelector('#recipe').insertAdjacentHTML("beforeend", recipe)
+    asd.forEach(element => {
+      document.querySelector('#explanation').insertAdjacentHTML("beforeend", `<p>${element}<p>`)
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=s, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/mypage.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="top">
+      보유재료
+      <a href="main.html" id="logo"><img src="images/home.png" alt="" id="logoimg"></a>
+    </div>
+    <div id="frige"></div>
+    <div id="materias"></div>
+  </div>
+
+  <script>
+    let logId = localStorage.getItem('logId')
+    let myMaterialData = JSON.parse(localStorage.getItem('myMaterialData'))
+    let materialData = JSON.parse(localStorage.getItem('materialData'))
+
+    materialData.forEach(e=>{
+      let material=
+      `
+      <img src="images/${e.mimage}" alt="" class="materias">
+      `
+      document.querySelector('#materias').insertAdjacentHTML("beforeend", material)
+    })
+
+    asdfqwer(myMaterialData)
+    function asdfqwer(e) {
+      let asdf = []
+      document.querySelector('#frige').innerHTML = ''
+      let asd = e.filter(element => element.id == logId);
+      asd.filter(e => {
+        materialData.forEach(element => e.material == element.material ? asdf.push(element) : undefined);
+      })
+      asdf.forEach(e => {
+        asdfg(e.mimage)
+      })
+      localStorage.setItem('myMaterialData', JSON.stringify(myMaterialData))
+    }
+
+    function asdfg(e) {
+      let materia =
+        `
+        <span id="materia">
+          <img src="images/${e}" alt="">
+        </span>
+      `
+      document.querySelector('#frige').insertAdjacentHTML("beforeend", materia)
+    }
+
+    document.querySelector('#materias').addEventListener('click', e => {
+      let isOk = false;
+      if (e.target.id != 'materias') {
+        let link = e.target.src
+        let last = link.lastIndexOf('/')
+        let asdfqwe = materialData.filter(e => e.mimage == link.slice(last + 1))
+        myMaterialData.forEach(e=>{
+          if(e.id==logId && e.material==asdfqwe[0].material){isOk = true}
+        })
+        if(isOk == true){alert('이미이씀')}
+        else{
+          myMaterialData.push({
+          id: logId,
+          material: asdfqwe[0].material
+        })
+        }
+        asdfqwer(myMaterialData)
+      }
+
+    })
+
+    
+    document.querySelectorAll('#materia').forEach(element => {  
+      element.addEventListener('click',e=>{
+        e.target.remove()
+        let link = e.target.src
+        let last = link.lastIndexOf('/')
+        let asdfqwe = materialData.filter(e => e.mimage == link.slice(last + 1))
+        console.log(asdfqwe[0].material)
+        let zzz = myMaterialData.filter(e=>{
+          e.material !=
+        })
+      })
+    });
+  </script>
+</body>
+
+</html>

@@ -1,5 +1,4 @@
 div{
-  border: 1px solid black;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -7,16 +6,14 @@ div{
 #top{
   width: 99%;
   background-color: yellowgreen;
-  border: 1px solid red;
-  margin-top: 50px;
   height: 100px;
+  overflow: hidden;
   line-height: 100px;
 }
 
 #nav{
   width: 99%;
   background-color: skyblue;
-  border: 1px solid red;
   overflow: hidden;
 }
 #nav ul{
@@ -43,8 +40,8 @@ div{
 #recipe div{
   width: 50%;
   text-align: center;
-  background-color: red;
   float: left;
+  margin-top: 20px;
 }
 #recipe img{
   width: 50%;
@@ -59,12 +56,24 @@ div{
 #rname{
   font-size: 30px;
 }
-a img{
+#logo img{
   height: 98px;
   width: 30%;
   margin: 0 30px;
   float: left;
-  border: 1px solid black;
+}
+
+.btns{
+  width: 51px;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+#suchbtn:hover{
+  background-color: rgb(102, 134, 36);
+}
+#suchbtn{
+  width: 51px;
+  vertical-align: middle;
 }
 
 #top input{
