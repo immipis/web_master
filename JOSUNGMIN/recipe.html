@@ -18,7 +18,9 @@
 
   <script>
     let recipeInfoData = JSON.parse(localStorage.getItem('recipeInfoData'))
+    console.log(recipeInfoData)
     let asd = recipeInfoData[0].explanation.split(';')
+
     let recipe =
       `
               <div id="rinfo" rcode=${recipeInfoData[0].rcode}>

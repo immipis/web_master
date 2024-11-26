@@ -13,82 +13,94 @@
     <div id="top">
       보유재료
       <a href="main.html" id="logo"><img src="images/home.png" alt="" id="logoimg"></a>
+      <img src="images/trash_can.png" alt="" id="delimg">
     </div>
     <div id="frige"></div>
-    <div id="materias"></div>
+    <div id="materials"></div>
   </div>
 
   <script>
     let logId = localStorage.getItem('logId')
     let myMaterialData = JSON.parse(localStorage.getItem('myMaterialData'))
     let materialData = JSON.parse(localStorage.getItem('materialData'))
-
-    materialData.forEach(e=>{
-      let material=
-      `
-      <img src="images/${e.mimage}" alt="" class="materias">
-      `
-      document.querySelector('#materias').insertAdjacentHTML("beforeend", material)
-    })
+    let myData = JSON.parse(localStorage.getItem('myData'))
 
     asdfqwer(myMaterialData)
+    materialData.forEach(e => {
+      let material =
+        `
+      <img src="images/${e.mimage}" alt="" class="materials">
+      `
+      document.querySelector('#materials').insertAdjacentHTML("beforeend", material)
+    })
+
     function asdfqwer(e) {
-      let asdf = []
+      let myMaterials = []
       document.querySelector('#frige').innerHTML = ''
-      let asd = e.filter(element => element.id == logId);
-      asd.filter(e => {
-        materialData.forEach(element => e.material == element.material ? asdf.push(element) : undefined);
-      })
-      asdf.forEach(e => {
-        asdfg(e.mimage)
+      let iHave = e.filter(element => element.id == logId);
+      iHave.filter(e => materialData.forEach(element => e.material == element.material ? myMaterials.push(element) : undefined))
+      myMaterials.forEach(e => {
+        drow(e)
       })
       localStorage.setItem('myMaterialData', JSON.stringify(myMaterialData))
     }
 
-    function asdfg(e) {
+    function drow(e) {
       let materia =
         `
         <span id="materia">
-          <img src="images/${e}" alt="">
+          <img src="images/${e.mimage}" class="myMaterials" alt="">
         </span>
       `
       document.querySelector('#frige').insertAdjacentHTML("beforeend", materia)
     }
+    asd()
+    document.querySelector('#materials').addEventListener('click', e => {
 
-    document.querySelector('#materias').addEventListener('click', e => {
       let isOk = false;
-      if (e.target.id != 'materias') {
+
+
+      if (e.target.id != 'materials') {
         let link = e.target.src
         let last = link.lastIndexOf('/')
         let asdfqwe = materialData.filter(e => e.mimage == link.slice(last + 1))
-        myMaterialData.forEach(e=>{
-          if(e.id==logId && e.material==asdfqwe[0].material){isOk = true}
+        myMaterialData.forEach(e => {
+          if (e.id == logId && e.material == asdfqwe[0].material) { isOk = true }
         })
-        if(isOk == true){alert('이미이씀')}
-        else{
+        if (isOk == true) {
+          alert('이미이씀')
+        }
+        else {
           myMaterialData.push({
-          id: logId,
-          material: asdfqwe[0].material
-        })
+            id: logId,
+            material: asdfqwe[0].material
+          })
         }
         asdfqwer(myMaterialData)
+        asd()
       }
-
     })
 
-    
-    document.querySelectorAll('#materia').forEach(element => {  
-      element.addEventListener('click',e=>{
-        e.target.remove()
-        let link = e.target.src
-        let last = link.lastIndexOf('/')
-        let asdfqwe = materialData.filter(e => e.mimage == link.slice(last + 1))
-        console.log(asdfqwe[0].material)
-        let zzz = myMaterialData.filter(e=>{
-          e.material !=
+    function asd() {
+      document.querySelectorAll('#materia').forEach(element => {
+        element.addEventListener('click', e => {
+          e.target.remove()
+          let link = e.target.src
+          let last = link.lastIndexOf('/')
+          let asdfqwe = materialData.filter(e => e.mimage == link.slice(last + 1))
+          myMaterialData = myMaterialData.filter(e => !(e.id == logId && e.material == asdfqwe[0].material))
+          localStorage.setItem('myMaterialData', JSON.stringify(myMaterialData))
         })
-      })
-    });
+      });
+    }
+    document.querySelector('#delimg').addEventListener('click',e=>{
+      myMaterialData = myMaterialData.filter(e=>(e.id != logId))
+      myData = myData.filter(e=>(e.id != logId))
+      localStorage.setItem('myData',JSON.stringify(myData))
+      localStorage.setItem('myMaterialData',JSON.stringify(myMaterialData))
+      location.href = 'login.html'
+    })
+
   </script>
 </body>
 

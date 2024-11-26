@@ -5,10 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
   <div id="container">
+    <div id="top">
+      로그인
+    </div>
     <table class="table">
       <tr>
         <th>아이디</th>
@@ -20,26 +24,113 @@
       </tr>
       <tr>
         <td colspan="2" align="center">
-          <button>로그인</button>
+          <button id="login">로그인</button>
+          <button id="singup">회원 가입</button>
         </td>
       </tr>
     </table>
+
+    <div id="modal" class="modal-overlay">
+      <div class="modal-window">
+        <h2>회원가입</h2>
+        <div id="closeBtn" class="close-area">X</div>
+        <table class="table table2">
+          <tr>
+            <th>아이디</th>
+            <td><input type="text" id="suid"></td>
+          </tr>
+          <tr>
+            <th>비밀번호</th>
+            <td><input type="password" id="supw"></td>
+          </tr>
+          <tr>
+            <th>비밀번호확인</th>
+            <td><input type="password" id="csupw"></td>
+          </tr>
+          <tr>
+            <th>이름</th>
+            <td><input type="text" id="name"></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <button id="singup2" style="width: 50%;">회원 가입</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
   <script>
-    const myData = JSON.parse(localStorage.getItem('myData'))
-    document.querySelector('button').addEventListener('click',e=>{
+    let myData = JSON.parse(localStorage.getItem('myData'))
+    document.querySelector('#login').addEventListener('click', e => {
       let id = document.querySelector('#uid').value;
       let pw = document.querySelector('#upw').value;
-      let loginInfo = myData.filter(member =>member.id == id && member.pw == pw)
-      if(loginInfo.length){
-        localStorage.setItem('logId',id);
-        localStorage.setItem('logName',loginInfo[0].name);
-        location.href='main.html'
+      let loginInfo = myData.filter(member => member.id == id && member.pw == pw)
+      if (loginInfo.length) {
+        localStorage.setItem('logId', id);
+        localStorage.setItem('logName', loginInfo[0].name);
+        location.href = 'main.html'
       }
-      else{
+      else {
         alert('입력정보를 확인하세요')
       }
     })
+
+    document.getElementById("singup").addEventListener("click", e => {
+      document.getElementById("modal").style.display = "flex"
+    })
+    document.getElementById("closeBtn").addEventListener("click", e => {
+      document.getElementById("modal").style.display = "none"
+    })
+    document.getElementById("singup2").addEventListener("click", e => {
+      let id = document.querySelector('#suid').value;
+      let pw = document.querySelector('#supw').value;
+      let cpw = document.querySelector('#csupw').value;
+      let name = document.querySelector('#name').value;
+      let isOk = true;
+
+      if (id == '' || pw == '' || cpw == '' || name == '') {
+        alert('입력하세요')
+        return
+      }
+
+      myData.forEach(element => {
+        if (element.id == id) {
+          isOk = false;
+        }
+      });
+
+      if (isOk == false) {
+        alert('아이디 중복')
+        document.querySelector('#suid').value = '';
+        document.querySelector('#supw').value = '';;
+        document.querySelector('#csupw').value = '';
+        document.querySelector('#name').value = '';
+      }
+      else if (pw != cpw) {
+        alert('비밀번호 일치하지 않음')
+        document.querySelector('#suid').value = '';
+        document.querySelector('#supw').value = '';;
+        document.querySelector('#csupw').value = '';
+        document.querySelector('#name').value = '';
+      }
+      else {
+        alert('가입성공')
+        localStorage.setItem('logId', id);
+        myData.push({
+          id: id,
+          pw: pw,
+          name: name
+        })
+
+        localStorage.setItem('myData', JSON.stringify(myData))
+        location.href = 'main.html'
+
+      }
+
+    })
+
+
   </script>
 
 </body>

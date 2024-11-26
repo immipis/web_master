@@ -13,8 +13,8 @@
 <body>
   <div id='container'>
     <div id="top">
-      <a href="main.html" id="logo"><img src="images/my_cooking_logo.png" alt="" ></a>
-      <input type="text" id="such"> 
+      <a href="main.html" id="logo"><img src="images/my_cooking_logo.png" alt=""></a>
+      <input type="text" id="such">
       <img src="images/sc.png" alt="검색" id="suchbtn" class="btns">
       <a href="mypage.html"><img src="images/mp.png" alt="마이페이지" class="btns right"></a>
       <a href="login.html"><img src="images/lo.png" alt="로그아웃" class="btns right" style="width: 37px;"></a>
@@ -54,17 +54,18 @@
         `
       document.querySelector('#recipe').insertAdjacentHTML("beforeend", recipe)
       document.querySelectorAll('#rinfo').forEach(e => {
-      e.addEventListener('click', e2 => {
-        if (e2.target.id == 'rinfo') {
-          ttt = recipeData.filter(e => e.rdescription == e2.target.childNodes[5].innerHTML)
-        }
-        else {
-          ttt = recipeData.filter(e => e.rdescription == e2.target.parentElement.childNodes[5].innerHTML)
-        }
-        localStorage.setItem('recipeInfoData', JSON.stringify(ttt))
-        location.href = 'recipe.html'
+        e.addEventListener('click', e2 => {
+
+          if (e2.target.id == 'rinfo') {
+            ttt = recipeData.filter(e => e.rdescription == e2.target.childNodes[5].innerHTML)
+          }
+          else {
+            ttt = recipeData.filter(e => e.rdescription == e2.target.parentElement.childNodes[5].innerHTML)
+          }
+          localStorage.setItem('recipeInfoData', JSON.stringify(ttt))
+          location.href = 'recipe.html'
+        })
       })
-    })
     }
     function dorw(e) {
 

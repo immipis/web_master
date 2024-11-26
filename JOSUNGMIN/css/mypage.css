@@ -18,8 +18,15 @@ img {
   width: 50px;
   position: absolute;
   top: 31px;
-  right: 50px;
+  right: 200px;
 }
+#delimg {
+  width: 50px;
+  position: absolute;
+  top: 31px;
+  right: 100px;
+}
+
 
 #frige {
   margin: 0 auto;
@@ -30,7 +37,7 @@ img {
   padding: 50px;
 }
 
-#materias {
+#materials {
   margin: 0 auto;
   margin-top: 50px;
   width: 80%;
