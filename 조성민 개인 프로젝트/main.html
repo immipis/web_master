@@ -18,6 +18,7 @@
       <img src="images/sc.png" alt="검색" id="suchbtn" class="btns">
       <a href="mypage.html"><img src="images/mp.png" alt="마이페이지" class="btns right"></a>
       <a href="login.html"><img src="images/lo.png" alt="로그아웃" class="btns right" style="width: 37px;"></a>
+      <a href="addRecipe.html"><img src="images/plus.png" alt="레시피 등록" class="btns right" style="width: 37px;"></a>
     </div>
     <div id="nav">
       <ul>
@@ -101,7 +102,7 @@
       document.querySelector('#recipe').innerHTML = ''
       let asd = document.querySelector('#such').value
       let qwe = materialData.filter(e => asd == e.mname)
-      let asdf = recipeData.filter(e => e.rcode == asd || e.rname == asd || e.rtag == asd)
+      let asdf = recipeData.filter(e => e.rname == asd || e.rtag == asd)
       if (qwe.length != 0) {
         let zxc = recipeData.filter(element => element.material == qwe[0].material);
         zxc.forEach(element => {

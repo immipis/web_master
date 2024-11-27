@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #top {
+      width: 99%;
+      background-color: yellowgreen;
+      height: 100px;
+      line-height: 100px;
+      font-size: 50px;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #logoimg {
+      width: 50px;
+      position: absolute;
+      top: 31px;
+      right: 150px;
+    }
+
+    #addRecipe {
+      margin: 0 auto;
+      margin-top: 50px;
+      width: 80%;
+      border: 10px solid rgb(211, 210, 210);
+      border-radius: 50px;
+      padding: 50px;
+    }
+
+    label {
+      display: inline-block;
+    }
+
+    #addImg {
+      width: 180px;
+      height: 200px;
+    }
+
+    #inputs {
+      margin: 20px;
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    #inputs input {
+      width: 50%;
+      height: 50px;
+      border: 5px solid rgb(211, 210, 210);
+      border-radius: 50px;
+      margin: 20px;
+    }
+
+    #inputs label {
+      width: 100px;
+    }
+
+    .addImg {
+      display: none;
+    }
+
+    .imgbox {
+      border: 1px solid black;
+      width: 180px;
+      height: 200px;
+      writing-mode: vertical-rl;
+      text-align: center;
+      font-weight: bold;
+      line-height: 180px;
+      color: rgba(63, 59, 59, 0.5);
+      font-size: xx-large;
+    }
+
+    button {
+      width: 20%;
+      height: 50px;
+      border: 1px solid greenyellow;
+      border-radius: 50px;
+      background-color: greenyellow;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id='container'>
+    <div id="top">
+      레시피등록
+      <a href="main.html" id="logo"><img src="images/home.png" alt="" id="logoimg"></a>
+    </div>
+    <div id="addRecipe">
+      <label for="chooseFile">
+        <div id="reImg" class="imgbox">음식사진</div>
+      </label>
+      <input type="file" id="chooseFile" name="chooseFile" accept="image/*" class="addImg" onchange="loadFile(this)">
+
+      <label for="chooseFile2">
+        <div id="meImg" class="imgbox">재료사진</div>
+      </label>
+      <input type="file" id="chooseFile2" name="chooseFile2" accept="image/*" class="addImg" onchange="loadFile2(this)">
+      <div id="inputs">
+
+        <label for="rname">이름</label>
+        <input type="text" id="rname" name="rname"><br>
+
+        <label for="rtag">종류</label>
+        <input type="text" id="rtag" name="rtag"><br>
+
+        <label for="smaterial">서브 재료</label>
+        <input type="text" id="smaterial" name="smaterial"><br>
+
+        <label for="rdescription">한줄설명</label>
+        <input type="text" id="rdescription" name="rdescription"><br>
+
+        <label for="explanation">레시피</label>
+        <input type="textarea" id="explanation" name="explanation"><br>
+
+        <button id="addRecipeBtn">등록</button>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    let recipeData = JSON.parse(localStorage.getItem('recipeData'))
+    let materialData = JSON.parse(localStorage.getItem('materialData'))
+
+    let img;
+    let rcode;
+    let mimage;
+    let rimage;
+    let thisMaterial;
+
+    if (recipeData.length + 1 <= 99) {
+      rcode = 'R0' + (recipeData.length + 1)
+      console.log(rcode)
+    }
+    else {
+      rcode = 'R' + (recipeData.length + 1)
+    }
+
+    let loadFile = (e) => {
+      img = e.value.slice(e.value.lastIndexOf('\\') + 1)
+      let addImg =
+        `
+                <img src="images/${img}" alt="" id="addImg">
+
+        `
+      rimage = img
+      document.querySelector('#reImg').innerHTML = ''
+      document.querySelector('#reImg').insertAdjacentHTML("beforeend", addImg)
+    }
+    let loadFile2 = (e) => {
+      img = e.value.slice(e.value.lastIndexOf('\\') + 1)
+      let addImg =
+        `
+                <img src="images/${img}" alt="" id="addImg">
+
+        `
+      mimage = img
+
+      thisMaterial = materialData.filter(e => e.mimage == mimage)
+      if (thisMaterial.length == 0) {
+        alert('이지미 재데로 등록하셈')
+        return;
+      }
+      document.querySelector('#meImg').innerHTML = ''
+      document.querySelector('#meImg').insertAdjacentHTML("beforeend", addImg)
+    }
+
+    document.querySelector('#addRecipeBtn').addEventListener('click', e => {
+      let rtag = document.querySelector('#rtag').value;
+      let rname = document.querySelector('#rname').value;
+      let smaterial = document.querySelector('#smaterial').value;
+      let explanation = document.querySelector('#explanation').value;
+      let rdescription = document.querySelector('#rdescription').value;
+      let isOk = true;
+      if (!rcode, !rimage, !thisMaterial[0].material, !rname, !rtag, !smaterial, !rdescription, !explanation) {
+        alert('제대로 등록 하셈')
+        return;
+      }
+      recipeData.forEach(element => {
+        if (element.rname == rname) {
+          isOk = false;
+        }
+      });
+      if (isOk == false) {
+        alert('이미 레시피가 등록 되어 있씁니다')
+      }
+      else {
+        recipeData.push({
+          rcode: rcode,
+          rimage: rimage,
+          material: thisMaterial[0].material,
+          rname: rname,
+          rtag: rtag,
+          smaterial: smaterial,
+          rdescription: rdescription,
+          explanation: explanation
+        })
+        localStorage.setItem('recipeData', JSON.stringify(recipeData))
+        location.href = 'main.html'
+      }
+
+    })
+  </script>
+</body>
+
+</html>

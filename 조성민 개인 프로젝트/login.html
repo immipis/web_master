@@ -89,7 +89,7 @@
       let name = document.querySelector('#name').value;
       let isOk = true;
 
-      if (id == '' || pw == '' || cpw == '' || name == '') {
+      if (!id||!pw||!cpw||!name) {
         alert('입력하세요')
         return
       }
